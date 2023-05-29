@@ -24,7 +24,14 @@ class newsModel extends Model {
     }
 }
 
+class registerModel extends Model{
+    constructor(){
+        super('tbl_register');
+    }
+}
+
 exports.activitiesModel = new activitiesModel;
 exports.adminModel = new adminModel;
 exports.blogsModel = new blogsModel;
 exports.newsModel = new newsModel;
+exports.registerModel = new registerModel;

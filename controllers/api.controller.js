@@ -1,6 +1,7 @@
 var activitesModel = require('../models').activitiesModel;
 var vlogsModel = require('../models').blogsModel;
 var newsModel = require('../models').newsModel;
+var registerModel = require('../models').registerModel;
 var apiResponse = require('../utils/apiResponses');
 
 exports.getActivitiesList = (req,res)=>{
@@ -50,6 +51,22 @@ exports.searchVlogsList = (req,res)=>{
 exports.searchNewsList = (req,res)=>{
     var data = req.query.search;
     var result = newsModel.searchByActivityDesc(data);
+    result.then((value)=>{
+        apiResponse.successResponse(req,res,"Success!",value);
+    }).catch((err)=>{
+        apiResponse.errorResponse(req,res,err);
+    })
+}
+
+exports.createRegister = (req,res)=>{
+    var body = req.body;
+    var data = {
+        name : body.name,
+        phNo : body.ph_no,
+        year : body.year,
+        semister : body.semister
+    }
+    var result = registerModel.create(data);
     result.then((value)=>{
         apiResponse.successResponse(req,res,"Success!",value);
     }).catch((err)=>{

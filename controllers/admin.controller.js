@@ -10,6 +10,9 @@ var common = require('../utils/common');
 exports.login = (req,res)=>{
     let name = req.body.name;
     let password = req.body.password;
+    var body = req.body;
+    var token = common.generateToken(body);
+    console.log(`Token is = ${token}`);
     var data = adminModel.adminCheckLogin(name,common.encryptPassword(password));
     data.then((value)=>{
         if(name == value[0].admin_name && common.encryptPassword(password) == value[0].admin_password){

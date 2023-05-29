@@ -36,6 +36,7 @@ exports.prettifyArray = (data) => {
 
 exports.verifyToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
+    console.log(token);
     if(!token){
         res.status(404).json({
             "code": 404,
