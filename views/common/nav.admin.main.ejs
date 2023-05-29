@@ -1,0 +1,201 @@
+<nav class="navbar p-0 fixed-top d-flex flex-row">
+    <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg"
+                alt="logo" /></a>
+    </div>
+    <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+        </button>
+        <ul class="navbar-nav w-100">
+            <li class="nav-item w-100">
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                    <input type="text" class="form-control" placeholder="Search products">
+                </form>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown d-none d-lg-block">
+                <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown"
+                    aria-expanded="false" href="#">+ Create New Posts</a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                    aria-labelledby="createbuttonDropdown">
+                    <h6 class="p-3 mb-0">Posts</h6>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item" data-bs-toggle="modal" data-bs-target="#uploadActivitiesPost">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1">Activities</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item" data-bs-toggle="modal" data-bs-target="#uploadNewsPost">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-newspaper"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1">News</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item" data-bs-toggle="modal" data-bs-target="#uploadVlogs">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-film"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1">Vlogs</p>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                    <div class="navbar-profile">
+                        <!-- <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt=""> -->
+                        <p class="mb-0 d-none d-sm-block navbar-profile-name">
+                            <%= adminName %>
+                        </p>
+                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                    aria-labelledby="profileDropdown">
+                    <h6 class="p-3 mb-0">Profile</h6>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item" data-bs-toggle="modal" data-bs-target="#addAdmin">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-user-group"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject mb-1">Add Admin</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item" href="/admin/login">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject mb-1">Log out</p>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="mdi mdi-format-line-spacing"></span>
+        </button>
+    </div>
+</nav>
+<!-- Add admin modal -->
+<div class="modal fade" id="addAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="adminAddFrm">
+                    <div class="mb-3">
+                        <label for="adminName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="adminName" name="adminName" placeholder="Name"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="adminEmail" name="adminEmail"
+                            placeholder="name@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="adminPassword" name="adminPassword"
+                            placeholder="Password" required>
+                    </div>
+                    <input type="submit" class="btn w-25" data-bs-dismiss="modal" value="Save">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Add activities post modal-->
+<div class="modal fade" id="uploadActivitiesPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="activitiesUpload">
+                    <label for="" class="form-label">Description</label>
+                    <textarea name="description" id="" rows="3" class="form-control"></textarea>
+                    <label for="" class="form-label mt-3">Img</label>
+                    <input type="file" class="form-control" style="background-color: white;" name="activities_img">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Upload">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Add news post modal-->
+<div class="modal fade" id="uploadNewsPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newsUpload">
+                    <label for="" class="form-label">Description</label>
+                    <textarea name="description" id="" rows="3" class="form-control"></textarea>
+                    <label for="" class="form-label mt-3">Img</label>
+                    <input type="file" class="form-control" style="background-color: white;" name="news_img">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Upload">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Add Vlogs post modal-->
+<div class="modal fade" id="uploadVlogs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="vlogsUpload">
+                    <label for="" class="form-label">Description</label>
+                    <textarea name="description" id="" rows="3" class="form-control"></textarea>
+                    <label for="" class="form-label mt-3">YouTube Video URL</label>
+                    <textarea id="" cols="30" rows="10" class="form-control" name="video"></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Upload">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

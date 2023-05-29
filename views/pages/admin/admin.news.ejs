@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../../common/links.ejs') %>
+</head>
+
+<body>
+    <div class="container-scroller">
+
+        <%- include('../../common/nav.admin.ejs') %>
+            <main class="container-fluid page-body-wrapper">
+                <%- include('../../common/nav.admin.main.ejs') %>
+                    <div class="main-panel">
+                        <div class="content-wrapper">
+                            <div class="row">
+                                <% for(var i=0;i<value.length;i++){%>
+                                    <% var date=value[i].created_At; var stringDate=date.toString(); var
+                                        splitDate=stringDate.split('00'); %>
+                                        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between mb-3">
+                                                        <div class=" text-white fw-bold">
+                                                            <%= splitDate[0] %>
+                                                        </div>
+                                                        <div>
+                                                            <div class="btn dropdown" data-bs-toggle="dropdown"
+                                                                aria-expanded="false"><i
+                                                                    class="fa-solid fa-ellipsis-vertical"></i>
+                                                            </div>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item btnEditNews"
+                                                                        data-bs-toggle="modal"
+                                                                        data-id="<%= value[i].id %>"><i
+                                                                            class="fa-solid fa-pencil me-2"></i>Edit</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item btnDeleteNews"
+                                                                        data-id="<%= value[i].id %>"><i
+                                                                            class="fa-solid fa-trash-can me-2"></i>Delete</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <img src="<%= value[i].img %>" alt="" class="card-img">
+                                                    <p class="card-text mt-3">
+                                                        <%= value[i].descriptions %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                            </div>
+                            <footer class="footer">
+                                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                                    <span
+                                        class="text-muted d-block text-center text-sm-left d-sm-inline-block">Developed
+                                        with
+                                        love by Kaung
+                                        Myat Thu</span>
+                                </div>
+                            </footer>
+                            <!-- partial -->
+                        </div>
+                        <!-- main-panel ends -->
+                    </div>
+                    <!--news view edit Modal -->
+                    <div class="modal fade viewEditNews" id="" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit News Info</h1>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" id="newsID" style="display: none;">
+                                    <form id="newsEditFrm">
+                                        <label for="">Descriptions</label>
+                                        <textarea name="description" id="descriptions" cols="30" rows="10"
+                                            class="form-control"></textarea>
+
+                                        <label class="mt-3">Image</label>
+                                        <img src="" alt="" class="card-img" id="img"
+                                            onclick="document.getElementById('img-file').click(); return false;">
+                                        <input type="file" id="img-file" class="form-control" name="edit_news_img"
+                                            style="display: none;" onchange="testOnload()">
+                                        <div class="mt-3">
+                                            <button type="button" class="btn btn-danger"
+                                                data-bs-dismiss="modal">Cancle</button>
+                                            <input type="submit" class="btn" data-bs-dismiss="modal" value="Save">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+    </div>
+    <%- include('../../common/script.ejs') %>
+        <script src="/javascripts/admin.js"></script>
+</body>
+
+</html>
