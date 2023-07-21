@@ -46,6 +46,30 @@ $("#activitiesUpload").submit(function (e) {
     })
 });
 
+//upcoming activity create 
+$("#upComingActivitiesUpload").submit(function (e) {
+    e.preventDefault();
+    var data = new FormData(this);
+    REST.post("/activities/upcoming/create", data, (err, result) => {
+        if (err) {
+            $.toast({
+                heading: 'Sorry!',
+                text: err,
+                icon: 'error',
+                position: 'bottom-right'
+            });
+        } else {
+            window.location.reload();
+            $.toast({
+                heading: 'Success!',
+                text: 'A post is added!',
+                icon: 'success',
+                position: 'bottom-right'
+            });
+        }
+    })
+})
+
 var testOnload = () => {
     var img = document.getElementById('img');
     var img_path = document.getElementById('img-file');
@@ -77,6 +101,22 @@ $(document).on('click', '.btnEditActivities', function () {
     })
 })
 
+//upcoming activites post view edit
+$(document).on('click', '.btnEditUpcomingActivities', function () {
+    var id = $(this).data("id");
+    REST.get('/activities/upcoming/' + id, (err, result) => {
+        $(".UpComingactivitiesEditFrm").trigger("reset");
+        var data = result.data;
+        var objDate = new Date(data.actiDate);
+        $("#UpComingactivityID").val(id)
+        $("#descriptions").val(data.descriptions);
+        $('#startDate').val(moment(objDate).format('YYYY-MM-DD'))
+        $("#startTime").val(data.actiTime)
+        $("#img").attr('src',data.img)
+        $(".viewEditUpcomingActivities").modal("show");
+    })
+})
+
 //news' posts' view edit
 $(document).on('click', '.btnEditNews', function () {
     var id = $(this).data("id");
@@ -96,6 +136,35 @@ $(document).on('submit', '#activitiesEditFrm', function (e) {
     var id = $("#activityID").val();
     var data = new FormData(this);
     REST.putWithImg('/activities/update/' + id, data, (err, result) => {
+        if (err) {
+            $.toast({
+                heading: 'Error!',
+                text: 'Something Wrong!',
+                icon: 'error',
+                position: 'bottom-right'
+            });
+        } else {
+            var code = result.code;
+            if (code == 200) {
+                window.location.reload();
+                $.toast({
+                    heading: 'Success!',
+                    text: 'post is updated!',
+                    icon: 'success',
+                    position: 'bottom-right'
+                });
+            }
+        }
+    })
+});
+
+//upcoming activities post edit
+$(document).on('submit', '#UpComingactivitiesEditFrm', function (e) {
+    e.preventDefault();
+    var id = $("#UpComingactivityID").val();
+    var data = new FormData(this);
+    console.log(data);
+    REST.putWithImg('/activities/upcoming/' + id, data, (err, result) => {
         if (err) {
             $.toast({
                 heading: 'Error!',
@@ -150,6 +219,28 @@ $(document).on('submit', '#newsEditFrm', function (e) {
 $(document).on('click', '.btnDeleteActivities', function () {
     var id = $(this).data("id");
     REST.delete('/activities/delete/', id, (err, result) => {
+        if (err) {
+            $.toast({
+                heading: 'Error!',
+                text: 'Something Wrong!',
+                icon: 'error',
+                position: 'bottom-right'
+            });
+        } else {
+            $.toast({
+                heading: 'Success!',
+                text: 'post is updated!',
+                icon: 'success',
+                position: 'bottom-right'
+            });
+        }
+    })
+})
+
+//upcoming activites post delete
+$(document).on('click', '.btnDeleteUpcomingActivities', function () {
+    var id = $(this).data("id");
+    REST.delete('/activites/upcoming/delete/', id, (err, result) => {
         if (err) {
             $.toast({
                 heading: 'Error!',
@@ -264,7 +355,7 @@ $(document).on('submit', '#vlogEditFrm', function (e) {
                 icon: 'error',
                 position: 'bottom-right'
             });
-        }else{
+        } else {
             var code = result.code;
             if (code == 200) {
                 window.location.reload();
@@ -298,6 +389,17 @@ $(document).on('click', '.btnDeleteVlog', function () {
                 icon: 'success',
                 position: 'bottom-right'
             });
+        }
+    })
+})
+
+$(document).on('click', '.btnLogout', function (e) {
+    e.preventDefault()
+    REST.logoutPost("/admin/logout", (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            window.location.href = result
         }
     })
 })

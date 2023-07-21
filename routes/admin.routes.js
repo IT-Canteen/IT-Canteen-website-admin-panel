@@ -7,5 +7,6 @@ module.exports = (app) =>{
     app.get("/admin",sessionMiddleware.checkSession,adminController.getIndexPage);
 
     app.post("/auth/admin/login",adminController.login);
+    app.post("/admin/logout",sessionMiddleware.destroySession);
     app.post('/admin/create',sessionMiddleware.checkSession,adminController.createAdmin);//to create admin
 }

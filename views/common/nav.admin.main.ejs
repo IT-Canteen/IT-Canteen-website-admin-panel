@@ -33,6 +33,18 @@
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item" data-bs-toggle="modal"
+                        data-bs-target="#uploadUpComingActivitiesPost">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1">UpComing Activities</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item" data-bs-toggle="modal" data-bs-target="#uploadNewsPost">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
@@ -81,7 +93,7 @@
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item" href="/admin/login">
+                    <a class="dropdown-item preview-item btnLogout" href="">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
                                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -144,6 +156,38 @@
                     <textarea name="description" id="" rows="3" class="form-control"></textarea>
                     <label for="" class="form-label mt-3">Img</label>
                     <input type="file" class="form-control" style="background-color: white;" name="activities_img">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Upload">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Add Activity Upcoming post modal-->
+<div class="modal fade" id="uploadUpComingActivitiesPost" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="upComingActivitiesUpload">
+                    <label for="" class="form-label">Description</label>
+                    <textarea name="description" id="" rows="3" class="form-control"></textarea>
+
+                    <label for="" class="form-label">Start Date</label>
+                    <input type="date" class="form-control actiDate" name="actiDate">
+
+                    <label for="" class="form-label">Start Time</label>
+                    <input type="time" class="form-control" name="actiTime">
+
+                    <label for="" class="form-label mt-3">Img</label>
+                    <input type="file" class="form-control" style="background-color: white;" name="activities_img">
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-primary" value="Upload">

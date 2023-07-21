@@ -6,6 +6,12 @@ class activitiesModel extends Model {
     }
 }
 
+class upComingActivityModel extends Model{
+    constructor(){
+        super('tbl_upcoming_acti');
+    }
+}
+
 class adminModel  extends Model {
    constructor(){
         super('tbl_admin');
@@ -31,6 +37,7 @@ class registerModel extends Model{
 }
 
 exports.activitiesModel = new activitiesModel;
+exports.upComingActivityModel = new upComingActivityModel;
 exports.adminModel = new adminModel;
 exports.blogsModel = new blogsModel;
 exports.newsModel = new newsModel;

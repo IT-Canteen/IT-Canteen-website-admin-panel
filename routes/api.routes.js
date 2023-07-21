@@ -1,13 +1,24 @@
 var apiController = require('../controllers/api.controller');
 var common = require('../utils/common');
 module.exports = (app)=>{
-    app.get('/api/activities',common.verifyToken,apiController.getActivitiesList);
-    app.get('/api/vlogs',common.verifyToken,apiController.getVlogsList);
-    app.get('/api/news',common.verifyToken,apiController.getNewsList);
-    app.get('/api/search/activities',common.verifyToken,apiController.searchActivitiesList);
-    app.get('/api/search/vlogs',common.verifyToken,apiController.searchVlogsList);
-    app.get('/api/search/news',common.verifyToken,apiController.searchNewsList);
+    app.get('/api/activities',apiController.getActivitiesList);//this is being used with limt offset
+    app.get('/api/vlogs',apiController.getVlogsList);
+    app.get('/api/news',apiController.getNewsList);
 
-    //post registrition
-    app.post('/api/register',common.verifyToken,apiController.createRegister);
+    //getting last 6 activities route
+    app.get('/api/activity',apiController.getLastSixActivity);
+
+    //get upcoming activity 
+    app.get('/api/upcoming/activity',apiController.getUpcomingActivity)
+
+    //api search routes
+    app.get('/api/search/activities',apiController.searchActivitiesList);
+    app.get('/api/search/vlogs',apiController.searchVlogsList);
+    app.get('/api/search/news',apiController.searchNewsList);
+
+    // registrition member route
+    app.post('/api/register',apiController.createRegister);
+
+    //test api
+    app.get('/api/test',apiController.test);
 }

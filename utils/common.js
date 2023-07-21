@@ -12,6 +12,10 @@ exports.now = () => {
     return moment(date).format('YYYY-MM-DD');
 }
 
+exports.formatTime = (date)=>{
+    return moment(date).format("hh:mm a");
+}
+
 exports.prettifyArray = (data) => {
     data.forEach((value, index) => {
         Object.entries(value).forEach(entry => {

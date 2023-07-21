@@ -62,6 +62,19 @@ REST.loginPost = (url,data,callback)=>{
     });
 }
 
+REST.logoutPost = (url,callback)=>{
+    $.ajax({
+        url : url,
+        type : 'POST',
+        success : function(){
+            callback(null,'/admin/login');
+        },
+        error : function(){
+            callback("Error!",null);
+        }
+    })
+}
+
 REST.put = (url, data, callback) => {
     $.ajax({
         url: url,

@@ -78,6 +78,17 @@ module.exports = class Model {
         });
     }
 
+    deleteUpcoming(id){
+        let tb = this;
+        return new Promise((resolve, reject) => {
+            mysql.query_filter('UPDATE  ?? SET status=1 WHERE id = ?', [tb.table, id], (error, result) => {
+                let data = tb.find(id);
+                data.then((value) => resolve(value))
+                .catch((err) => reject(err));
+            });
+        });
+    }
+
     adminCheckLogin(name,pass){
         let tb = this;
         return new Promise((resolve,reject)=>{
@@ -122,6 +133,37 @@ module.exports = class Model {
         let tb = this;
         return new Promise((resolve,reject)=>{
             mysql.query_filter('SELECT * FROM ?? WHERE descriptions LIKE ?',[tb.table,'%'+data+'%'],(error,result)=>{
+                if(error) throw error;
+                resolve(result);
+            })
+        })
+    }
+
+    getActivityList(page){
+        let tb = this;
+        var limit = 10;
+        return new Promise((resolve,reject)=>{
+            mysql.query_filter(`select * from ?? limit ${limit} offset ${(page-1)*limit};`,[tb.table],(error,result)=>{
+                if(error) throw error;
+                resolve(result);
+            })
+        })
+    }
+
+    getLastUpcomingActivityList(){
+        let tb = this;
+        return new Promise((resolve,reject)=>{
+            mysql.query_filter('SELECT * FROM ?? order by id desc limit 1',[tb.table],(error,result)=>{
+                if(error) throw error;
+                resolve(result);
+            })
+        })
+    }
+
+    getLastSixActivity(){
+        let tb = this;
+        return new Promise((resolve,reject)=>{
+            mysql.query_filter('SELECT * FROM ?? order by id desc limit 6',[tb.table],(error,result)=>{
                 if(error) throw error;
                 resolve(result);
             })
